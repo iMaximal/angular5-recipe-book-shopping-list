@@ -1,5 +1,7 @@
 # Angular 5 Recipe Book + Shopping List
 
+Technologies: Angular 5, Bootstrap, TypeScript.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
 ## Development server
