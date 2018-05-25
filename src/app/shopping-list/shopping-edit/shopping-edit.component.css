@@ -1,0 +1,6 @@
+.btn {
+  margin-right: 5px;
+}
+.btn:last-child {
+  margin-right: 0;
+}
