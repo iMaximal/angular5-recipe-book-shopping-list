@@ -5,18 +5,27 @@ import 'rxjs/Rx';
 import { RecipeService } from '../recipes/recipe.service';
 import { FIREBASE_DB } from '../keys';
 import { Recipe } from '../recipes/recipe.model';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class DataStorageService {
-  constructor(private http: Http, private recipeService: RecipeService) {
+  constructor(
+    private http: Http,
+    private recipeService: RecipeService,
+    private authService: AuthService
+  ) {
   }
 
   storeRecipes() {
-    return this.http.put(`${FIREBASE_DB}/recipes.json`, this.recipeService.getRecipes());
+    const token = this.authService.getToken();
+
+    return this.http.put(`${FIREBASE_DB}/recipes.json?auth=${token}`, this.recipeService.getRecipes());
   }
 
   fetchRecipes() {
-    this.http.get(`${FIREBASE_DB}/recipes.json`)
+    const token = this.authService.getToken();
+
+    this.http.get(`${FIREBASE_DB}/recipes.json?auth=${token}`)
       .map(
         (response: Response) => {
           const recipes: Recipe[] = response.json();
