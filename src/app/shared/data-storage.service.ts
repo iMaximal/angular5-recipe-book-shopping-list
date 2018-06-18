@@ -17,7 +17,13 @@ export class DataStorageService {
   storeRecipes() {
     const token = this.authService.getToken();
 
-    return this.httpClient.put(`${FIREBASE_DB}/recipes.json?auth=${token}`, this.recipeService.getRecipes());
+    return this.httpClient.put(
+      `${FIREBASE_DB}/recipes.json?auth=${token}`,
+      this.recipeService.getRecipes(),
+      {
+        observe: 'body'
+      }
+    );
   }
 
   getRecipes() {
