@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import 'rxjs/Rx';
 
 import { RecipeService } from '../recipes/recipe.service';
@@ -18,10 +18,11 @@ export class DataStorageService {
     const token = this.authService.getToken();
 
     return this.httpClient.put(
-      `${FIREBASE_DB}/recipes.json?auth=${token}`,
+      `${FIREBASE_DB}/recipes.json`,
       this.recipeService.getRecipes(),
       {
-        observe: 'body'
+        observe: 'body',
+        params: new HttpParams().set('auth', token),
       }
     );
   }
