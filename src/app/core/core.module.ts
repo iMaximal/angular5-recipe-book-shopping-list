@@ -10,6 +10,7 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { RecipeService } from '../recipes/recipe.service';
 import { AuthService } from '../auth/auth.service';
 import { AuthInterceptor } from '../shared/auth.interceptor';
+import { LoginInterceptor } from '../shared/login.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,12 @@ import { AuthInterceptor } from '../shared/auth.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoginInterceptor,
+      multi: true,
+    },
   ],
 })
 export class CoreModule {
