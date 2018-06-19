@@ -71,7 +71,7 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
         editedIngredientIndex: action.payload,
       };
 
-    case ShoppingListActions.StopEdit:
+    case ShoppingListActions.STOP_EDIT:
       return {
         ...state,
         editedIngredient: null,
