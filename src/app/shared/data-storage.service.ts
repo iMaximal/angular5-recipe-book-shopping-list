@@ -4,7 +4,6 @@ import 'rxjs/Rx';
 
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
-import { AuthService } from '../auth/auth.service';
 import { FIREBASE_DB } from '../keys';
 
 @Injectable()
