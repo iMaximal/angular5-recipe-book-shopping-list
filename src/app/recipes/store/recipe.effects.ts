@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/withLatestFrom';
+import { switchMap, withLatestFrom, map } from 'rxjs/operators';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 
@@ -15,11 +14,10 @@ export class RecipeEffects {
   @Effect()
   recipeFetch = this.actions$
     .ofType(RecipeActions.FETCH_RECIPES)
-    .switchMap(
+    .pipe(switchMap(
       (action: RecipeActions.FetchRecipes) => {
         return this.httpClient.get<Recipe[]>(`${FIREBASE_DB}/recipes.json`);
-      })
-    .map(
+      }), map(
       (recipes) => {
         for (let recipe of recipes) {
           if (!recipe['ingredients']) {
@@ -31,24 +29,24 @@ export class RecipeEffects {
           payload: recipes
         };
       }
-    );
+    ));
 
   @Effect({ dispatch: false })
   recipeStore = this.actions$
     .ofType(RecipeActions.STORE_RECIPES)
-    .withLatestFrom(this.store.select('recipes'))
-    .switchMap(([action, state]) => {
-      const req = new HttpRequest(
-        'PUT',
-        `${FIREBASE_DB}/recipes.json`,
-        state.recipes,
-        {
-          reportProgress: true,
-        }
-      );
+    .pipe(withLatestFrom(this.store.select('recipes')),
+      switchMap(([action, state]) => {
+        const req = new HttpRequest(
+          'PUT',
+          `${FIREBASE_DB}/recipes.json`,
+          state.recipes,
+          {
+            reportProgress: true,
+          }
+        );
 
-      return this.httpClient.request(req);
-    });
+        return this.httpClient.request(req);
+      }));
 
   constructor(private actions$: Actions,
               private httpClient: HttpClient,

@@ -16,6 +16,7 @@ npm install
 
 ## Usage
 
+Rename all *.backup files -> drop .backup extention and you should provide your information.
 
 Start:
 ````bash
