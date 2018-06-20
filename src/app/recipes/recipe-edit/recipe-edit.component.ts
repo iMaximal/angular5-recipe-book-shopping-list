@@ -79,7 +79,7 @@ export class RecipeEditComponent implements OnInit {
     let recipeName = '';
     let recipeImagePath = '';
     let recipeDescription = '';
-    const recipeIngredients = new FormArray([]);
+    let recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
       this.store.select('recipes')

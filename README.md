@@ -21,4 +21,13 @@ Rename all *.backup files -> drop .backup extention and you should provide your 
 Start:
 ````bash
 npm run start
+http://localhost:4200/
+````
+
+Build if you want to see a Production build of app with Universal (locally):
+
+````bash
+npm run build:ssr 
+npm run serve:ssr
+http://localhost:4000/
 ````
