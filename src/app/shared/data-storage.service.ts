@@ -15,7 +15,7 @@ export class DataStorageService {
 
   storeRecipes() {
     // return this.httpClient.put(
-    //   `${FIREBASE_DB}/recipes.json`,
+    //   `${FIREBASE_DB}/recipeState.json`,
     //   this.recipeService.getRecipes(),
     //   {
     //     observe: 'body',
